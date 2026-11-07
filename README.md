@@ -13,6 +13,21 @@ Lyrion Music Server (LMS / Squeezebox) plugin, der giver adgang til alle over 23
 
 ---
 
+## Forudsætning: PlayHLS v2
+
+DR's kanaler streames som HLS (`.m3u8`), som Lyrion ikke kan afspille uden pluginnet **PlayHLS v2** (af bpa). Uden det spiller de kommercielle stationer fint, men DR-kanalerne starter ikke.
+
+1. Hvis du har PlayHLS **v1** installeret, så afinstallér det først (v1 kræver ffmpeg og giver fejlen *"Couldn't create command line for hls playback"*).
+2. Gå til **Indstillinger → Plugins → Yderligere arkiver** og tilføj:
+   ```text
+   http://bpa-code.github.io/bpaplugins/repo-playhls-v2.xml
+   ```
+3. Tryk **Anvend**, aktivér **PlayHLS**, og genstart Lyrion.
+
+Mere info: [PlayHLS-tråden på Lyrion-forummet](https://forums.lyrion.org/forum/user-forums/3rd-party-software/99692-announce-playhls-plugin-plugin-to-play-apple-hls-m3u8-stream).
+
+---
+
 ## Installation i Lyrion (LMS)
 
 Du kan installere pluginnet direkte via Lyrions webinterface ved at tilføje dette GitHub-arkiv:
