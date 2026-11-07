@@ -51,7 +51,7 @@ Efter genstart finder du **DK Radio** under din musikafspillers **Radio**-menu.
 
 Hvis du foretrækker manuel installation:
 
-1. Download [`DKRadio-0.1.1.zip`](DKRadio-0.1.1.zip).
+1. Download [`DKRadio-0.1.2.zip`](DKRadio-0.1.2.zip).
 2. Udpak indholdet til en mappe kaldet `DKRadio` i din Lyrion-servers `Plugins`-mappe.
 3. Genstart Lyrion Music Server.
 

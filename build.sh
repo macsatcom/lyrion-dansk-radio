@@ -26,7 +26,7 @@ cat > dist/repo.xml <<EOF
 			<title lang="DA">DK Radio</title>
 			<desc lang="EN">All Danish radio stations from radio.dk</desc>
 			<desc lang="DA">Alle danske radiostationer fra radio.dk</desc>
-			<creator>ksn</creator>
+			<creator>Kasper S Nielsen</creator>
 			<url>${BASE_URL}/${ZIP}</url>
 			<sha>${SHA}</sha>
 		</plugin>

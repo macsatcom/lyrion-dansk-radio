@@ -23,7 +23,6 @@ sub initPlugin {
 		feed   => \&handleFeed,
 		tag    => 'dkradio',
 		menu   => 'radios',
-		is_app => 1,
 		weight => 10,
 	);
 }

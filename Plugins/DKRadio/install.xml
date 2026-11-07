@@ -2,9 +2,9 @@
 <extension>
 	<name>PLUGIN_DKRADIO</name>
 	<module>Plugins::DKRadio::Plugin</module>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<description>PLUGIN_DKRADIO_DESC</description>
-	<creator>ksn</creator>
+	<creator>Kasper S Nielsen</creator>
 	<id>6f1c2d4e-8a7b-4c39-9e51-2b3d4a5f6c70</id>
 	<category>radio</category>
 	<defaultState>enabled</defaultState>
