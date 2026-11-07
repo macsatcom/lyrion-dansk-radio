@@ -61,4 +61,79 @@ sub parseResponse {
 	};
 }
 
+my %REGION_MAP = (
+	'Hovedstaden'      => 'Hovedstaden',
+	'Capital Region'   => 'Hovedstaden',
+	'North Zealand'    => 'Hovedstaden',
+	'Frederiksberg'    => 'Hovedstaden',
+	'Zealand'          => 'Sjælland',
+	'Southern Denmark' => 'Syddanmark',
+	'Central Jutland'  => 'Midtjylland',
+	'North Jutland'    => 'Nordjylland',
+);
+my @REGION_ORDER = ('Hovedstaden', 'Sjælland', 'Syddanmark', 'Midtjylland', 'Nordjylland');
+
+sub danishRegion {
+	my ($apiRegion) = @_;
+	return $REGION_MAP{ $apiRegion // '' };
+}
+
+# Sort key: lowercase, then push æ/ø/å after z ({ | } follow z in ASCII).
+sub _sortKey {
+	my $k = lc($_[0] // '');
+	$k =~ tr/æøå/{|}/;
+	return $k;
+}
+
+sub sortStations {
+	my ($stations) = @_;
+	return [ sort { _sortKey($a->{name}) cmp _sortKey($b->{name}) } @$stations ];
+}
+
+sub stationItem {
+	my ($s) = @_;
+	return {
+		name      => $s->{name},
+		type      => 'audio',
+		url       => $s->{url},
+		image     => $s->{image},
+		line2     => join(' · ', grep { length } (join(', ', @{ $s->{genres} }), $s->{city})),
+		on_select => 'play',
+	};
+}
+
+sub _folder {
+	my ($name, $stations) = @_;
+	return { name => $name, type => 'link', items => [ map { stationItem($_) } @{ sortStations($stations) } ] };
+}
+
+sub topMenu {
+	my ($stations, $str) = @_;
+	my $other = $str->('PLUGIN_DKRADIO_OTHER');
+
+	my (%byRegion, @noRegion, %byGenre, @noGenre, @dr);
+	for my $s (@$stations) {
+		my $reg = danishRegion($s->{region});
+		if ($reg) { push @{ $byRegion{$reg} }, $s } else { push @noRegion, $s }
+
+		if (@{ $s->{genres} }) { push @{ $byGenre{$_} }, $s for @{ $s->{genres} } }
+		else                   { push @noGenre, $s }
+
+		push @dr, $s if $s->{name} =~ /^DR\s/;
+	}
+
+	my @regionFolders = map { _folder($_, $byRegion{$_}) } grep { $byRegion{$_} } @REGION_ORDER;
+	push @regionFolders, _folder($other, \@noRegion) if @noRegion;
+
+	my @genreFolders = map { _folder($_, $byGenre{$_}) } sort { _sortKey($a) cmp _sortKey($b) } keys %byGenre;
+	push @genreFolders, _folder($other, \@noGenre) if @noGenre;
+
+	return [
+		_folder($str->('PLUGIN_DKRADIO_ALL'), $stations),
+		{ name => $str->('PLUGIN_DKRADIO_REGION'), type => 'link', items => \@regionFolders },
+		{ name => $str->('PLUGIN_DKRADIO_GENRE'),  type => 'link', items => \@genreFolders },
+		_folder($str->('PLUGIN_DKRADIO_DR'), \@dr),
+	];
+}
+
 1;
