@@ -12,7 +12,7 @@
 			<link>https://github.com/macsatcom/lyrion-dansk-radio</link>
 			<creator>Kasper S Nielsen</creator>
 			<creatorEmail>kasper@smsweb.dk</creatorEmail>
-			<url>https://raw.githubusercontent.com/macsatcom/lyrion-dansk-radio/main/DKRadio-0.1.2.zip</url>
+			<url>https://github.com/macsatcom/lyrion-dansk-radio/releases/download/plugin-v0.1.2/DKRadio-0.1.2.zip</url>
 			<sha>37dd925836f95eb7dac0598d39620d758037162f</sha>
 		</plugin>
 	</plugins>

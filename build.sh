@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
-# Usage: BASE_URL=https://example.org/dkradio ./build.sh
-# Produces dist/DKRadio-<version>.zip and dist/repo.xml pointing at BASE_URL.
+# Usage: ./build.sh            build dist/DKRadio-<version>.zip and dist/repo.xml
+#        ./build.sh --release  also publish GitHub release plugin-v<version> and update ./repo.xml
 set -euo pipefail
 cd "$(dirname "$0")"
 
-: "${BASE_URL:?Set BASE_URL to where the zip will be hosted}"
+GH_REPO="macsatcom/lyrion-dansk-radio"
 VERSION=$(sed -n 's:.*<version>\(.*\)</version>.*:\1:p' Plugins/DKRadio/install.xml)
 ZIP="DKRadio-${VERSION}.zip"
+TAG="plugin-v${VERSION}"
 
 prove -I. t/
 
@@ -29,7 +30,7 @@ cat > dist/repo.xml <<EOF
 			<link>https://github.com/macsatcom/lyrion-dansk-radio</link>
 			<creator>Kasper S Nielsen</creator>
 			<creatorEmail>kasper@smsweb.dk</creatorEmail>
-			<url>${BASE_URL}/${ZIP}</url>
+			<url>https://github.com/${GH_REPO}/releases/download/${TAG}/${ZIP}</url>
 			<sha>${SHA}</sha>
 		</plugin>
 	</plugins>
@@ -37,3 +38,13 @@ cat > dist/repo.xml <<EOF
 EOF
 
 echo "Built dist/${ZIP} (sha1 ${SHA}) and dist/repo.xml"
+
+if [[ "${1:-}" == "--release" ]]; then
+	if gh release view "$TAG" -R "$GH_REPO" >/dev/null 2>&1; then
+		echo "Release $TAG already exists - bump <version> in install.xml first" >&2
+		exit 1
+	fi
+	gh release create "$TAG" "dist/${ZIP}" -R "$GH_REPO" --title "DK Radio ${VERSION}" --notes "DK Radio plugin ${VERSION}"
+	cp dist/repo.xml repo.xml
+	echo "Released $TAG. Commit and push repo.xml to publish it to Lyrion."
+fi

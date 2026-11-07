@@ -51,7 +51,7 @@ Efter genstart finder du **DK Radio** under din musikafspillers **Radio**-menu.
 
 Hvis du foretrækker manuel installation:
 
-1. Download [`DKRadio-0.1.2.zip`](DKRadio-0.1.2.zip).
+1. Download den nyeste `DKRadio-<version>.zip` under [Releases](https://github.com/macsatcom/lyrion-dansk-radio/releases).
 2. Udpak indholdet til en mappe kaldet `DKRadio` i din Lyrion-servers `Plugins`-mappe.
 3. Genstart Lyrion Music Server.
 
@@ -64,8 +64,8 @@ Kør test-suiten lokalt:
 prove -I. t/
 ```
 
-Byg ny zip og `repo.xml`:
+Udgiv en ny version (hæv først `<version>` i `Plugins/DKRadio/install.xml`):
 ```bash
-BASE_URL=https://raw.githubusercontent.com/macsatcom/lyrion-dansk-radio/main ./build.sh
-cp dist/* .
+./build.sh --release   # tester, bygger zip, opretter GitHub-release plugin-v<version> og opdaterer repo.xml
+git add repo.xml Plugins && git commit -m "release <version>" && git push
 ```
