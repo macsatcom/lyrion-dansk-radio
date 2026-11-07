@@ -1,0 +1,31 @@
+PLUGIN_DKRADIO
+	DA	DK Radio
+	EN	DK Radio
+
+PLUGIN_DKRADIO_DESC
+	DA	Alle danske radiostationer fra radio.dk
+	EN	All Danish radio stations from radio.dk
+
+PLUGIN_DKRADIO_ALL
+	DA	Alle stationer
+	EN	All stations
+
+PLUGIN_DKRADIO_REGION
+	DA	Region
+	EN	Region
+
+PLUGIN_DKRADIO_GENRE
+	DA	Genre
+	EN	Genre
+
+PLUGIN_DKRADIO_DR
+	DA	DR
+	EN	DR
+
+PLUGIN_DKRADIO_OTHER
+	DA	Øvrige
+	EN	Other
+
+PLUGIN_DKRADIO_ERROR
+	DA	Kunne ikke hente stationer – prøv igen senere
+	EN	Could not load stations – please try again later
