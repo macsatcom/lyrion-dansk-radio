@@ -27,7 +27,14 @@ sub selectStream {
 			($best, $bestKey) = ($s, $key);
 		}
 	}
-	return $best->{url};
+	return cleanUrl($best->{url});
+}
+
+# Remove Low-Latency HLS delta-playlist directives that simple HLS clients can't handle.
+sub cleanUrl {
+	my ($url) = @_;
+	$url =~ s/([?&])_HLS_skip=[^&]*(&|$)/$2 ? $1 : ''/e;
+	return $url;
 }
 
 sub normalizeStation {

@@ -35,4 +35,10 @@ is($sel->([
 is(Plugins::DKRadio::Menu::bitrateFromUrl('https://drliveradio2.akamaized.net/hls/live/2118698/p1/playlist-320000.m3u8'),
    0, 'long digit runs are not bitrates');
 
+is($sel->([{ url => 'https://x/p1/playlist-320000.m3u8?_HLS_skip=YES', contentFormat => 'audio/aac', status => 'VALID' }]),
+   'https://x/p1/playlist-320000.m3u8', 'LL-HLS _HLS_skip directive stripped');
+
+is($sel->([{ url => 'https://x/s?a=1&_HLS_skip=YES&b=2', contentFormat => 'audio/aac', status => 'VALID' }]),
+   'https://x/s?a=1&b=2', '_HLS_skip stripped, other params kept');
+
 done_testing;

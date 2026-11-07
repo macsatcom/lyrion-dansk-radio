@@ -4,14 +4,14 @@
 		<title lang="EN">DK Radio repository</title>
 	</details>
 	<plugins>
-		<plugin name="DKRadio" version="0.1.0" minTarget="8.0" maxTarget="*">
+		<plugin name="DKRadio" version="0.1.1" minTarget="8.0" maxTarget="*">
 			<title lang="EN">DK Radio</title>
 			<title lang="DA">DK Radio</title>
 			<desc lang="EN">All Danish radio stations from radio.dk</desc>
 			<desc lang="DA">Alle danske radiostationer fra radio.dk</desc>
 			<creator>ksn</creator>
-			<url>https://raw.githubusercontent.com/macsatcom/lyrion-dansk-radio/main/DKRadio-0.1.0.zip</url>
-			<sha>9ec9a52ce68c8e906358e5c7c7da5b15348e3846</sha>
+			<url>https://raw.githubusercontent.com/macsatcom/lyrion-dansk-radio/main/DKRadio-0.1.1.zip</url>
+			<sha>20c98712a940e0f2fe5159c8f098a1786444f7dc</sha>
 		</plugin>
 	</plugins>
 </extensions>
